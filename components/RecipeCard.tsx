@@ -1,28 +1,31 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
-import { useRouter } from 'expo-router';
-import { Recipe } from '../constants/recipes';
-import { theme } from '../constants/theme';
-import DietaryTag from './DietaryTag';
+import React from "react";
+import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { useRouter } from "expo-router";
+import { Recipe } from "../constants/recipes";
+import { theme } from "../constants/theme";
+import DietaryTag from "./DietaryTag";
+
+/**
+ * RecipeCard Component
+ * A visually engaging card used to display recipe previews,
+ * featuring dynamic match percentages and dietary labels.
+ */
 
 interface RecipeCardProps {
   recipe: Recipe & { matchPercentage?: number };
   compact?: boolean;
 }
 
-export default function RecipeCard({ recipe, compact = false }: RecipeCardProps) {
+export default function RecipeCard({
+  recipe,
+  compact = false,
+}: RecipeCardProps) {
   const router = useRouter();
 
   const getPercentageColor = (pct: number) => {
-    if (pct >= 75) return '#4CAF50';
-    if (pct >= 50) return '#FF9800';
-    return '#FF5252';
+    if (pct >= 75) return "#4CAF50";
+    if (pct >= 50) return "#FF9800";
+    return "#FF5252";
   };
 
   return (
@@ -31,17 +34,29 @@ export default function RecipeCard({ recipe, compact = false }: RecipeCardProps)
       onPress={() => router.push(`/recipe/${recipe.id}`)}
       activeOpacity={0.85}
     >
-      <Image source={{ uri: recipe.image }} style={styles.image} />
+      <Image source={recipe.image} style={styles.image} resizeMode="cover" />
       <View style={styles.overlay} />
       <View style={styles.content}>
         <View style={styles.topRow}>
           <DietaryTag type={recipe.dietaryType} small />
           <View style={styles.rightBadges}>
-            {recipe.matchPercentage !== undefined && recipe.matchPercentage > 0 && (
-              <View style={[styles.percentageBadge, { backgroundColor: getPercentageColor(recipe.matchPercentage) }]}>
-                <Text style={styles.percentageText}>{recipe.matchPercentage}% match</Text>
-              </View>
-            )}
+            {recipe.matchPercentage !== undefined &&
+              recipe.matchPercentage > 0 && (
+                <View
+                  style={[
+                    styles.percentageBadge,
+                    {
+                      backgroundColor: getPercentageColor(
+                        recipe.matchPercentage,
+                      ),
+                    },
+                  ]}
+                >
+                  <Text style={styles.percentageText}>
+                    {recipe.matchPercentage}% match
+                  </Text>
+                </View>
+              )}
             <View style={styles.badge}>
               <Text style={styles.badgeText}>{recipe.difficulty}</Text>
             </View>
@@ -64,7 +79,7 @@ export default function RecipeCard({ recipe, compact = false }: RecipeCardProps)
 const styles = StyleSheet.create({
   card: {
     borderRadius: theme.radius.lg,
-    overflow: 'hidden',
+    overflow: "hidden",
     height: 220,
     marginBottom: theme.spacing.md,
   },
@@ -73,26 +88,26 @@ const styles = StyleSheet.create({
     marginBottom: theme.spacing.sm,
   },
   image: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
+    width: "100%",
+    height: "100%",
+    position: "absolute",
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.45)',
+    backgroundColor: "rgba(0,0,0,0.45)",
   },
   content: {
     flex: 1,
     padding: theme.spacing.md,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   topRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
   },
   rightBadges: {
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
     gap: 4,
   },
   percentageBadge: {
@@ -103,10 +118,10 @@ const styles = StyleSheet.create({
   percentageText: {
     color: theme.colors.white,
     fontSize: 11,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   badge: {
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: "rgba(0,0,0,0.5)",
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: theme.radius.full,
@@ -114,23 +129,23 @@ const styles = StyleSheet.create({
   badgeText: {
     color: theme.colors.white,
     fontSize: 11,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   bottom: {},
   title: {
     color: theme.colors.white,
     fontSize: 18,
-    fontWeight: '700',
+    fontWeight: "700",
     marginBottom: 6,
     lineHeight: 24,
   },
   meta: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 12,
   },
   metaText: {
-    color: 'rgba(255,255,255,0.8)',
+    color: "rgba(255,255,255,0.8)",
     fontSize: 12,
-    fontWeight: '500',
+    fontWeight: "500",
   },
 });

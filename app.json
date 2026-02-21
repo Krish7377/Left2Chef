@@ -3,33 +3,41 @@
     "name": "Left2Chef",
     "slug": "left2chef",
     "version": "1.0.0",
-    "sdkVersion": "54.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/appIcon.png",
     "userInterfaceStyle": "light",
+
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#1A1A2E"
     },
+
     "assetBundlePatterns": ["**/*"],
+
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.left2chef.app"
     },
+
     "android": {
+      "package": "com.left2chef.app",
+      "versionCode": 1,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/appIcon.png",
         "backgroundColor": "#1A1A2E"
-      },
-      "package": "com.left2chef.app"
+      }
     },
+
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
+
     "plugins": ["expo-router"],
+
     "scheme": "left2chef",
+
     "experiments": {
       "typedRoutes": true
     }

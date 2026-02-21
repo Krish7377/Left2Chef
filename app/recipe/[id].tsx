@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,14 +6,14 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
-} from 'react-native';
-import { useLocalSearchParams, useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { RECIPES } from '../../constants/recipes';
-import { theme } from '../../constants/theme';
-import { useSavedRecipes } from '../../hooks/useSavedRecipes';
-import DietaryTag from '../../components/DietaryTag';
-import Button from '../../components/Button';
+} from "react-native";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { RECIPES } from "../../constants/recipes";
+import { theme } from "../../constants/theme";
+import { useSavedRecipes } from "../../hooks/useSavedRecipes";
+import DietaryTag from "../../components/DietaryTag";
+import Button from "../../components/Button";
 
 export default function RecipeDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -34,7 +34,11 @@ export default function RecipeDetail() {
       <SafeAreaView style={styles.container}>
         <View style={styles.notFound}>
           <Text style={styles.notFoundText}>Recipe not found</Text>
-          <Button title="Go Back" onPress={() => router.back()} variant="outline" />
+          <Button
+            title="Go Back"
+            onPress={() => router.back()}
+            variant="outline"
+          />
         </View>
       </SafeAreaView>
     );
@@ -54,7 +58,7 @@ export default function RecipeDetail() {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {/* Hero Image */}
       <View style={styles.imageContainer}>
-        <Image source={{ uri: recipe.image }} style={styles.image} />
+        <Image source={recipe.image} style={styles.image} resizeMode="cover" />
         <View style={styles.imageOverlay} />
       </View>
 
@@ -85,8 +89,10 @@ export default function RecipeDetail() {
 
         {/* Ingredients */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>🥕 Ingredients</Text>
-          <Text style={styles.sectionSub}>{recipe.ingredients.length} items needed</Text>
+          <Text style={styles.sectionTitle}>Ingredients</Text>
+          <Text style={styles.sectionSub}>
+            {recipe.ingredients.length} items needed
+          </Text>
           <View style={styles.ingredientGrid}>
             {recipe.ingredients.map((ingredient, index) => (
               <View key={index} style={styles.ingredientChip}>
@@ -98,8 +104,10 @@ export default function RecipeDetail() {
 
         {/* Instructions */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>📋 Instructions</Text>
-          <Text style={styles.sectionSub}>{recipe.instructions.length} steps</Text>
+          <Text style={styles.sectionTitle}>Instructions</Text>
+          <Text style={styles.sectionSub}>
+            {recipe.instructions.length} steps
+          </Text>
           {recipe.instructions.map((step, index) => (
             <View key={index} style={styles.step}>
               <View style={styles.stepNumber}>
@@ -112,9 +120,9 @@ export default function RecipeDetail() {
 
         {/* Save Button */}
         <Button
-          title={saved ? '❤️ Saved to Favorites' : '🤍 Save Recipe'}
+          title={saved ? "Saved to Cookbook" : "Save Recipe"}
           onPress={handleSaveToggle}
-          variant={saved ? 'secondary' : 'primary'}
+          variant={saved ? "secondary" : "primary"}
           fullWidth
           style={styles.saveBtn}
         />
@@ -130,15 +138,15 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     height: 280,
-    position: 'relative',
+    position: "relative",
   },
   image: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
   imageOverlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: "rgba(0,0,0,0.2)",
   },
   content: {
     padding: theme.spacing.lg,
@@ -150,15 +158,15 @@ const styles = StyleSheet.create({
   title: {
     color: theme.colors.text,
     fontSize: 28,
-    fontWeight: '800',
+    fontWeight: "800",
     marginTop: theme.spacing.sm,
     marginBottom: theme.spacing.md,
     lineHeight: 34,
     letterSpacing: -0.3,
   },
   metaRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     backgroundColor: theme.colors.surfaceElevated,
     borderRadius: theme.radius.md,
     padding: theme.spacing.md,
@@ -167,7 +175,7 @@ const styles = StyleSheet.create({
   },
   metaItem: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
     gap: 4,
   },
   metaEmoji: {
@@ -176,7 +184,7 @@ const styles = StyleSheet.create({
   metaLabel: {
     color: theme.colors.textSecondary,
     fontSize: 12,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   metaDivider: {
     width: 1,
@@ -189,7 +197,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     color: theme.colors.text,
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: "700",
     marginBottom: 2,
   },
   sectionSub: {
@@ -198,8 +206,8 @@ const styles = StyleSheet.create({
     marginBottom: theme.spacing.md,
   },
   ingredientGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     gap: 8,
   },
   ingredientChip: {
@@ -213,28 +221,28 @@ const styles = StyleSheet.create({
   ingredientText: {
     color: theme.colors.text,
     fontSize: 13,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   step: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: theme.spacing.md,
     marginBottom: theme.spacing.md,
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
   },
   stepNumber: {
     width: 30,
     height: 30,
     borderRadius: 15,
     backgroundColor: theme.colors.primary,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     flexShrink: 0,
     marginTop: 1,
   },
   stepNumberText: {
     color: theme.colors.white,
     fontSize: 13,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   stepText: {
     flex: 1,
@@ -247,8 +255,8 @@ const styles = StyleSheet.create({
   },
   notFound: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     gap: theme.spacing.lg,
   },
   notFoundText: {

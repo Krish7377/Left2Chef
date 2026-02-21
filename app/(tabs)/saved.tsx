@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -6,13 +6,19 @@ import {
   FlatList,
   TouchableOpacity,
   Alert,
-} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useFocusEffect } from 'expo-router';
-import { useSavedRecipes } from '../../hooks/useSavedRecipes';
-import { theme } from '../../constants/theme';
-import RecipeCard from '../../components/RecipeCard';
-import { Recipe } from '../../constants/recipes';
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useFocusEffect } from "expo-router";
+import { useSavedRecipes } from "../../hooks/useSavedRecipes";
+import { theme } from "../../constants/theme";
+import RecipeCard from "../../components/RecipeCard";
+import { Recipe } from "../../constants/recipes";
+
+/**
+ * Saved Screen Component
+ * Manages and displays the user's collection of saved recipes,
+ * utilizing a FlatList for performance and an Alert system for removals.
+ */
 
 export default function Saved() {
   const { savedRecipes, loading, remove, refresh } = useSavedRecipes();
@@ -20,22 +26,18 @@ export default function Saved() {
   useFocusEffect(
     React.useCallback(() => {
       refresh();
-    }, [refresh])
+    }, [refresh]),
   );
 
   const handleRemove = (recipe: Recipe) => {
-    Alert.alert(
-      'Remove Recipe',
-      `Remove "${recipe.title}" from saved?`,
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Remove',
-          style: 'destructive',
-          onPress: () => remove(recipe.id),
-        },
-      ]
-    );
+    Alert.alert("Remove Recipe", `Remove "${recipe.title}" from saved?`, [
+      { text: "Cancel", style: "cancel" },
+      {
+        text: "Remove",
+        style: "destructive",
+        onPress: () => remove(recipe.id),
+      },
+    ]);
   };
 
   if (loading) {
@@ -47,7 +49,7 @@ export default function Saved() {
   }
 
   return (
-    <SafeAreaView style={styles.container} edges={['bottom']}>
+    <SafeAreaView style={styles.container} edges={["bottom"]}>
       <FlatList
         data={savedRecipes}
         keyExtractor={(item) => item.id}
@@ -59,14 +61,13 @@ export default function Saved() {
               onPress={() => handleRemove(item)}
               activeOpacity={0.8}
             >
-              <Text style={styles.removeBtnText}>🗑 Remove</Text>
+              <Text style={styles.removeBtnText}>Remove</Text>
             </TouchableOpacity>
           </View>
         )}
         contentContainerStyle={styles.list}
         ListEmptyComponent={
           <View style={styles.empty}>
-            <Text style={styles.emptyEmoji}>❤️</Text>
             <Text style={styles.emptyTitle}>No Saved Recipes</Text>
             <Text style={styles.emptyText}>
               Explore recipes and tap "Save Recipe" to save your favorites here.
@@ -76,7 +77,8 @@ export default function Saved() {
         ListHeaderComponent={
           savedRecipes.length > 0 ? (
             <Text style={styles.header}>
-              {savedRecipes.length} Saved Recipe{savedRecipes.length > 1 ? 's' : ''}
+              {savedRecipes.length} Saved Recipe
+              {savedRecipes.length > 1 ? "s" : ""}
             </Text>
           ) : null
         }
@@ -93,8 +95,8 @@ const styles = StyleSheet.create({
   },
   center: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: theme.colors.background,
   },
   loadingText: {
@@ -109,27 +111,27 @@ const styles = StyleSheet.create({
     color: theme.colors.textSecondary,
     fontSize: 14,
     marginBottom: theme.spacing.md,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   cardContainer: {
     marginBottom: 4,
   },
   removeBtn: {
-    backgroundColor: theme.colors.error + '15',
+    backgroundColor: theme.colors.error + "15",
     borderRadius: theme.radius.md,
     paddingVertical: 10,
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: theme.spacing.md,
     borderWidth: 1,
-    borderColor: theme.colors.error + '30',
+    borderColor: theme.colors.error + "30",
   },
   removeBtnText: {
     color: theme.colors.error,
     fontSize: 13,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   empty: {
-    alignItems: 'center',
+    alignItems: "center",
     paddingTop: 80,
     paddingHorizontal: theme.spacing.xl,
   },
@@ -140,13 +142,13 @@ const styles = StyleSheet.create({
   emptyTitle: {
     color: theme.colors.text,
     fontSize: 22,
-    fontWeight: '700',
+    fontWeight: "700",
     marginBottom: 8,
   },
   emptyText: {
     color: theme.colors.textSecondary,
     fontSize: 15,
-    textAlign: 'center',
+    textAlign: "center",
     lineHeight: 24,
   },
 });
