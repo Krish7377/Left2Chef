@@ -1,8 +1,8 @@
-# Left2Chef 👨‍🍳
+# Left2Chef 
 
 Left2Chef is a smart, localized recipe application built with Expo and React Native. It's designed to help you figure out what to cook today by matching the ingredients you already have in your kitchen with delicious recipes.
 
-## ✨ Features
+## Features
 
 - **Ingredient Matching Engine:** Simply input what ingredients you have in your fridge, and the custom matching engine will instantly calculate match percentages and show you what recipes you can make.
 - **Daily Specials:** If you don't feel like searching, the Home dashboard automatically serves up randomized daily recipe recommendations.
@@ -10,14 +10,14 @@ Left2Chef is a smart, localized recipe application built with Expo and React Nat
 - **CookBook Local Storage:** Found a recipe you like? Save it! The CookBook securely saves your favorite recipes locally to your device using AsyncStorage.
 - **Beautiful UI:** Provides an aesthetic, smooth user experience powered by custom React Native components and centralized theming.
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **Framework:** React Native / Expo
 - **Language:** TypeScript
 - **Navigation:** Expo Router
 - **Storage:** React Native Async Storage
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -46,6 +46,6 @@ Ensure you have Node.js and npm installed on your machine. You will also need th
    - Press `i` to open it on an iOS simulator.
    - Or, scan the QR code generated in the terminal using your phone's camera (iOS) or the Expo Go app (Android).
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License.
